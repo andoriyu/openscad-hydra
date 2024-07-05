@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "metric_bolts": {
+      "script_path": "./label.scad",
+      "module_name": "drawLabel",
+      "params": {
+        "width": [2, 3, 4],
+        "length": [8, 12, 16, 20],
+        "head_type": ["hex", "philips"],
+        "cs": [true, false]
+      }
+    }
+  }
+}
