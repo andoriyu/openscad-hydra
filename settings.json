@@ -2,12 +2,19 @@
   "profiles": {
     "metric_bolts": {
       "script_path": "./label.scad",
-      "module_name": "drawLabel",
+      "module_name": "drawScrewLabel",
       "params": {
         "width": [2, 3, 4],
         "length": [8, 12, 16, 20],
         "head_type": ["hex", "philips"],
         "cs": [true, false]
+      }
+    },
+    "metric_washers": {
+      "script_path": "./label.scad",
+      "module_name": "drawWasherLabel",
+      "params": {
+        "width": [2, 3, 4, 5, 6]
       }
     }
   }

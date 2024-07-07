@@ -1,4 +1,4 @@
-include <BOSL2/std.scad>
+  include <BOSL2/std.scad>
 //include <screw_head.scad>
 //include <screw_profiles.scad>
 
@@ -69,12 +69,37 @@ module bottomLine(width, length) {
     up(0.2) fwd(2.2) text3d(txt, size=4.2 ,h=H, anchor=CENTER+BOT, atype="ycenter");
 }
 
+module blank() {
+  xscale(0.99) import("./label.3mf");
+}
 
 
-module drawLabel(width, length, head_type, cs) {
+module drawScrewLabel(width, length, head_type, cs) {
   union() {
-    import("./label.3mf");
+    blank();
     #topLine(length, head_type,cs);
     bottomLine(width, length);
   }
 }
+
+module washerBottomLine(width) {
+    left(6) up(0.2) fwd(2.2) text3d("Washers", size=4.2 ,h=H, anchor=LEFT+BOT, atype="ycenter");
+}
+
+module washerTopLine(width) {
+    txt = str("M",width);
+    left(6) up(0.2) back(2.2) text3d(txt, size=4.2 ,h=H, anchor=LEFT+BOT, atype="ycenter");
+}
+
+module drawWasherLabel(width) {
+  union() {
+    color("green") left(11) tube(h=H, or=4.5, wall=3, anchor=BOT);
+    washerTopLine(width);
+    washerBottomLine(width);
+    blank();
+  }
+}
+
+//drawScrewLabel(2, 12, "hex", false);
+
+//drawWasherLabel(3);
