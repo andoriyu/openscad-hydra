@@ -62,7 +62,6 @@
             jq
             just
             pkg-config
-            rust-analyzer-nightly
             zlib
             openscad-unstable
             asciinema

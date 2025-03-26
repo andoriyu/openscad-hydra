@@ -10,6 +10,7 @@ use tracing::{debug, error, info};
 
 use indicatif::{ParallelProgressIterator, ProgressStyle};
 use rayon::prelude::*;
+use ulid::Ulid;
 
 pub mod settings;
 
@@ -61,13 +62,14 @@ fn main() -> anyhow::Result<()> {
 
 fn compile_stl_from_profile(profile: &CompiledProfile, out_dir: &Path) -> anyhow::Result<()> {
     let mut script = NamedTempFile::new_in("./")?;
+    let id = Ulid::new();
+    info!("wat {}", id.to_string());
     let outfile = out_dir
         .to_owned()
         .join(profile.name())
-        .join(profile.output_filename());
-    let parent = outfile.parent().unwrap();
+        .join(format!("{}.3mf", id.to_string()));
 
-    info!(profile = ?profile, outfile = %parent.display(), "Processing...");
+    info!(profile = ?profile, outfile = %outfile.display(), "Processing...");
 
     profile.write_script(&mut script)?;
     script.flush()?;
